@@ -1,0 +1,46 @@
+# Dependencies
+/node_modules/
+
+# Build output
+/dist
+/build
+
+# Editor preferences
+/.vscode/
+/.idea/
+/.atom/
+
+# Test coverage reports
+/coverage/
+
+# Temporary files
+/temp/
+/tmp/
+
+# Logs
+*.log
+
+# IDE specific files
+.npmignore
+.prettierrc
+.stylelintrc
+.eslintrc.js
+
+# dotenv environment file
+.env
+
+# Optional: CI/CD configuration files
+.circleci/config.yml
+.travis.yml
+.gitlab-ci.yml
+
+# Local development environment variables
+.env.local
+.env.development
+.env.test
+
+# Markdown related files
+.markdownlint.js
+.markdownlint.json
+
+.DS_Store
