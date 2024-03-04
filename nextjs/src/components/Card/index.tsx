@@ -9,21 +9,17 @@ import {
   ListItemText,
 } from '@mui/material';
 
-function MovieCard({
-  title,
-  platforms,
-}: {
-  title: String;
-  platforms: String[];
-}) {
-  const platformList = platforms.map((platform) => (
-    <ListItem disablePadding>
+function MovieCard({ movie }: { movie: Movie }) {
+  const { title, platforms } = movie;
+
+  const platformList = platforms?.map((platform, index) => (
+    <ListItem disablePadding key={`platform-list-item-${index}`}>
       <ListItemText primary={platform} />
     </ListItem>
   ));
 
   return (
-    <Card sx={{ minWidth: 275 }} className="p-5">
+    <Card sx={{ minWidth: 275 }} className="p-5 w-full">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Movie
