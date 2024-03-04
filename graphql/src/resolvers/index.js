@@ -110,4 +110,130 @@ export const resolvers = {
       }
     },
   },
+
+  // mutations to alter data in db
+  Mutation: {
+    // add
+    addMovie: async (_, { movie }) => {
+      try {
+        const newMovie = new Movie(movie);
+        await newMovie.save();
+
+        return newMovie;
+      } catch (error) {
+        console.error('Error adding movie:', error);
+        throw new Error('Failed to add movie');
+      }
+    },
+    addUser: async (_, { user }) => {
+      try {
+        const newUser = new User(user);
+        await newUser.save();
+
+        return newUser;
+      } catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Failed to add user');
+      }
+    },
+    addReview: async (_, { review }) => {
+      try {
+        const newReview = new Review(review);
+        await newReview.save();
+
+        return newReview;
+      } catch (error) {
+        console.error('Error adding review:', error);
+        throw new Error('Failed to add review');
+      }
+    },
+
+    // delete
+    deleteMovie: async (_, { id }) => {
+      try {
+        const deleted = await Movie.findByIdAndDelete(id);
+        if (!deleted) {
+          throw new Error('Movie not found');
+        }
+
+        return { success: true };
+      } catch (error) {
+        throw new Error(`Error deleting movie: ${error.message}`);
+      }
+    },
+    deleteUser: async (_, { id }) => {
+      try {
+        const deleted = await User.findByIdAndDelete(id);
+        if (!deleted) {
+          throw new Error('User not found');
+        }
+
+        return { success: true };
+      } catch (error) {
+        throw new Error(`Error deleting user: ${error.message}`);
+      }
+    },
+    deleteReview: async (_, { id }) => {
+      try {
+        const deleted = await Review.findByIdAndDelete(id);
+        if (!deleted) {
+          throw new Error('Review not found');
+        }
+
+        return { success: true };
+      } catch (error) {
+        throw new Error(`Error deleting review: ${error.message}`);
+      }
+    },
+
+    // update
+    updateMovie: async (_, { id, movie }) => {
+      try {
+        const existingMovie = await Movie.findById(id);
+        if (!existingMovie) {
+          throw new Error('Movie not found');
+        }
+
+        Object.assign(existingMovie, movie);
+        await existingMovie.save();
+
+        return existingMovie;
+      } catch (error) {
+        console.error('Error updating movie:', error);
+        throw new Error('Failed to update movie');
+      }
+    },
+    updateUser: async (_, { id, user }) => {
+      try {
+        const existingUser = await User.findById(id);
+        if (!existingUser) {
+          throw new Error('User not found');
+        }
+
+        Object.assign(existingUser, user);
+        await existingUser.save();
+
+        return existingUser;
+      } catch (error) {
+        console.error('Error updating user:', error);
+        throw new Error('Failed to update user');
+      }
+    },
+    updateReview: async (_, { id, review }) => {
+      try {
+        const existingReview = await Review.findById(id);
+        if (!existingReview) {
+          throw new Error('Review not found');
+        }
+
+        Object.assign(existingReview, review);
+        await existingReview.save();
+
+        return existingReview;
+      } catch (error) {
+        console.error('Error updating review:', error);
+        throw new Error('Failed to update review');
+      }
+    },
+  },
 };
